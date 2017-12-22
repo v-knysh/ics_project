@@ -1,8 +1,8 @@
 <template>
   <section class="header">
        <div class="header-title animated fadeInUp">
-        <h2 class="main-title">Якісне управління для кота</h2>
-        <p class="main-description">Заходь та керуй їжею без зайвих складнощів</p>
+        <h2 class="main-title">{{ title }}</h2>
+        <p class="main-description">{{ descriptition }}</p>
       </div>
     </div>
   </section>
@@ -10,10 +10,11 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Main',
   data () {
     return {
-      msg: 'Welcome to EatCat'
+      title: 'Якісне управління для кота',
+      descriptition:'Заходь та керуй їжею без зайвих складнощів'
     }
   }
 }
