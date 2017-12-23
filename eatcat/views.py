@@ -38,12 +38,11 @@ def user_info(request, pet_id):
 
 
 def auth(request):
-    print(request.method)
     pass
     if request.method == 'POST':
         post_data = {}
-        user = authenticate(username=post_data['username'], password=post_data['password'])
+        user = authenticate(username=post_data.get('username'), password=post_data.get('password'))
         if user is not None:
             pass
     else:
-        return HttpResponse(json.dumps())
+        return HttpResponse(json.dumps({}))
