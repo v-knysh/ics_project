@@ -1,26 +1,21 @@
 <template>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-4">
-				<div class="col-xs-12" id="sticky-sidebar">
-					<ul class="nav flex-column">
-						<li class="nav-item">
-							<a class="nav-link active" href="#">Кіт</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" href="#">Disabled</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-xs-8" id="main">
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			<nav class="col-xs-3 bg-faded sidebar">
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item">
+						<router-link class="nav-link" to="/dashboard/about">Про кота</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/dashboard/refrigerator">Холодильник</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/dashboard/plan">План їжі</router-link>
+					</li>
+				</ul>
+			</nav>
+			<div class="col-xs-9" id="main">
+				<router-view></router-view>
 			</div>
 		</div>
 	</div>
@@ -33,6 +28,9 @@ export default {
 		return {
 			title: 'Якісне управління для кота',
 		}
+	},
+	created: function() {
+		this.$router.push('/dashboard/about');
 	}
 }
 </script>
