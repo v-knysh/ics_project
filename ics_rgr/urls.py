@@ -20,6 +20,8 @@ from eatcat import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cats/all', views.cats_list),
-    path('cats/<int:cat_id>', views.cat_info),
+    path('pets/all', views.pets_list),
+    path('pets/<int:pet_id>', views.pet_info),
+    path('users/all', views.pets_list),
+    path('users/<int:pet_id>', views.pet_info),
 ]

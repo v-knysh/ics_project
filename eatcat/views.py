@@ -1,14 +1,31 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 import json
 
-from eatcat.models import Cat
-# Create your views here.
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.shortcuts import render
 
-def cats_list(request):
-    cats = [Cat(f"Cat{i}", 5+i/2)for i in range(10)]
-    return HttpResponse(json.dumps(cats, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+from eatcat.models.pet import Pet
 
-def cat_info(request, cat_id):
-    cat = Cat(f"Cat{cat_id}", 5+cat_id/2)
-    return HttpResponse(json.dumps(cat, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+
+
+
+def pets_list(request):
+    pets = list(Pet.objects.all())
+    return HttpResponse(json.dumps(pets, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+
+
+def pet_info(request, pet_id):
+    pet = Pet.objects.filter(id__exact=pet_id).first()
+    return HttpResponse(json.dumps(pet, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+
+
+def users_list(request):
+    users = list(User.objects.all())
+    return HttpResponse(json.dumps(users , default=lambda o: o.__dict__, sort_keys=True, indent=4))
+
+
+def user_info(request, pet_id):
+    user = User.objects.filter(id__exact=pet_id).first()
+    return HttpResponse(json.dumps(user, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+
