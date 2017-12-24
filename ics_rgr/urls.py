@@ -19,7 +19,13 @@ from django.urls import path
 from eatcat import views
 
 urlpatterns = [
+    path('', views.index),
+    path('pets/all', views.pets_list),
+    path('pets/<int:pet_id>', views.pet_info),
+    path('users/all', views.users_list),
+    path('users/<int:pet_id>', views.user_info),
+    path('auth', views.auth),
+
     path('admin/', admin.site.urls),
-    path('cats/all', views.cats_list),
-    path('cats/<int:cat_id>', views.cat_info),
+
 ]
