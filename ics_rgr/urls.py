@@ -25,6 +25,8 @@ urlpatterns = [
     path('users/all', views.users_list),
     path('users/<int:pet_id>', views.user_info),
     path('auth', views.auth),
+    path('reg', views.registration),
+    path('dashboard', views.registration),
 
     path('admin/', admin.site.urls),
 

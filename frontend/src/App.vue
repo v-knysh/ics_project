@@ -5,7 +5,7 @@
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item" v-if="isLogin">
-					<a class="nav-link" href="#" @click="goDashboard">Зайти до кабінета, {{ username }}</a>
+					<route-link class="nav-link" to="/dashboard">Зайти до кабінета, {{ username }}</route-link>
 				</li>
 				<li class="nav-item" v-if="isLogin">
 					<button class="btn btn-danger" href="#" @click="logout">Вийти з кабінету</button>
@@ -117,42 +117,32 @@ export default {
 		submitLogin: function(event) {
 			let close = this.$refs.closeLogin;
 			let data = {
-				login: this.login,
+				username: this.login,
 				password: this.password
 			}
-
-			this.$http.post('http://localhost:8000/users', data).then(response => {
+			console.log(data); 
+			this.$http.post('http://localhost:8000/auth', data, {emulateJSON: true}).then(response => {
 				localStorage.setItem('pk', response.body.pk)
-				localStorage.setItem('username', response.body.user)
-				this.username = response.body.user
+				localStorage.setItem('username', response.body.username)
+				this.username = response.body.username
 				this.isLogin = true
 				close.click()
 			}, err => {
-				alert(err.msg)
-			})
-		},
-		goDashboard: function(event) {
-			let data = {
-				pk: localStorage.getItem('pk')
-			}
-			this.$http.post('http://localhost:8000/', data).then(response => {
-				this.$router.push('/dashboard/')
-			}, err => {
-				alert(err.msg)
+				alert(err.body.msg)
 			})
 		},
 		regButton: function(event) {
 			let close = this.$refs.closeReg;
 			let data = {
-				login: this.newlogin,
+				username: this.newlogin,
 				email: this.email,
 				password: this.newpassword
 			}
-			this.$http.post('http://localhost:8000/reg', data).then(response => {
+			this.$http.post('http://localhost:8000/reg', data, {emulateJSON: true}).then(response => {
 				alert(`Заэрестровано користувача ${this.newlogin}`)
 				close.click();
-			}, err => {
-				console.log(err); 
+			}, err => { 
+				alert(err.body.msg)
 			});
 		},
 		logout: function() {
@@ -182,3 +172,4 @@ export default {
 <style>
 
 </style>
+ 

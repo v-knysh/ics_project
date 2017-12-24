@@ -30,6 +30,13 @@ export default {
 		}
 	},
 	created: function() {
+		let data = {
+			pk: localStorage.getItem('pk')
+		}
+		this.$http.post('http://localhost:8000/dashboard', data).then(response => {
+		}, err => {
+			alert(err.msg)
+		})
 		this.$router.push('/dashboard/about');
 	}
 }

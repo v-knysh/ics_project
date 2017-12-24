@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Resource from 'vue-resource';
+import Resource from 'vue-resource'
+import VueCookie from 'vue-cookie'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Dashboard from '@/components/Dashboard'
@@ -9,10 +10,8 @@ import Refrigerator from '@/components/Refrigerator'
 import About from '@/components/About'
 
 Vue.use(Router)
-Vue.use(Resource);
-
-Vue.http.headers.common['Content-Type'] = 'application/json'
-// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
+Vue.use(Resource)
+Vue.use(VueCookie)
 
 export default new Router({
   linkActiveClass: 'active',
