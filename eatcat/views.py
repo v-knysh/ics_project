@@ -52,12 +52,5 @@ def registration(request):
             return JsonResponse({'ok':'ok'})
 
 def dashboard(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = User.objects.all().values_list('username', flat=True)
-        if username in user:
-            return JsonResponse({'msg':'Такий користувач вже існує'}, status=500)
-        else:
-            User.objects.create_user(username=username, password=password)
-            return JsonResponse({'ok':'ok'})
+    # user = User.objects.get(pk=)
+    return JsonResponse({'ok':'ok'})
