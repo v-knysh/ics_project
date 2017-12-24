@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<h1>About Cat: Name</h1>
+			<h2>Загальна інформація про кота</h2>
 			
 		</div>
 	</div>

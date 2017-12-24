@@ -36,7 +36,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 #sticky-sidebar {
 	background-color: #343a40;
 	position:fixed;
@@ -57,5 +57,11 @@ export default {
 }
 #sticky-sidebar .nav-item .nav-link:hover{
 	color: #fff
+}
+#main{
+	padding: 20px 40px;
+}
+#main h2{
+	margin-bottom: 40px;
 }
 </style>
