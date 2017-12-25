@@ -52,5 +52,28 @@ def registration(request):
             return JsonResponse({'ok':'ok'})
 
 def dashboard(request):
-    # user = User.objects.get(pk=)
-    return JsonResponse({'ok':'ok'})
+    if request.method == 'POST':
+        pk = request.POST['pk']
+        user = User.objects.get(pk=pk)
+        print(user.username)
+        pet = Pet.objects.filter(owner=user);
+        if pet:
+            return JsonResponse({'isPet':True})
+        else:
+            return JsonResponse({'isPet':False})
+
+def createdPet(request):
+    if request.method == 'POST':
+        data = request.POST
+        user = User.objects.get(pk=data['pk'])
+        pet = Pet(name=data['name'], weight=data['weight'], age=data['age'], owner=user)
+        pet.save()
+        return JsonResponse({'isPet':True})
+
+def infoPet(request):
+    if request.method == 'POST':
+        data = request.POST
+        user = User.objects.get(pk=data['pk'])
+        pet = Pet.objects.get(owner=user)
+        return JsonResponse({'name':pet.name,'age':pet.age,'weight':pet.weight})
+
