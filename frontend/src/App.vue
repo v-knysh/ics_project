@@ -101,7 +101,6 @@ export default {
 	name: 'app',
 	data () {
 		return {
-			title: 'Якісне управління для кота',
 			isLogin: false,
 			login: '',
 			password: '',
@@ -114,6 +113,21 @@ export default {
 		}
 	},
 	methods: {
+		exponentialBackoff: function(router,url,data,options,max,delay,callback) {
+			let t = this;
+			router.post(url,data,options).then(response =>{
+				callback(response);
+			},err =>{
+				if (max > 0) {
+						console.log('Problem with connect'); 
+            setTimeout(function() {
+               t.exponentialBackoff(router,url,data,options, --max, delay * 2, callback);
+            }, delay);
+        } else {
+             console.err('we give up');   
+        }
+			})
+		},
 		submitLogin: function(event) {
 			let close = this.$refs.closeLogin;
 			let data = {
@@ -138,11 +152,9 @@ export default {
 				email: this.email,
 				password: this.newpassword
 			}
-			this.$http.post('http://localhost:8000/reg', data, {emulateJSON: true}).then(response => {
+			this.exponentialBackoff(this.$http,'http://localhost:8000/reg',data,{emulateJSON: true},10,100,response => {
 				alert(`Заэрестровано користувача ${this.newlogin}`)
 				close.click();
-			}, err => { 
-				alert(err.body.msg)
 			});
 		},
 		logout: function() {
@@ -162,7 +174,7 @@ export default {
 			}
 		},
 	},
-	created: function () {
+	created: function () { 
 		this.checkoutLogin();
 	} 
 
