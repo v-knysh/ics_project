@@ -109,7 +109,7 @@ export default {
 			email:'',
 			username: '',
 			modal:'',
-			pk: ''
+			pk: '',
 		}
 	},
 	methods: {
