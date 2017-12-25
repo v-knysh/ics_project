@@ -3,19 +3,22 @@
 		<div class="row">
 			<nav class="col-xs-3 bg-faded sidebar">
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item">
+					<li class="nav-item" v-if="!isPet">
+						<router-link class="nav-link" to="/dashboard/created">Створити кота +</router-link>
+					</li>
+					<li class="nav-item" v-if="isPet">
 						<router-link class="nav-link" to="/dashboard/about">Про кота</router-link>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" v-if="isPet">
 						<router-link class="nav-link" to="/dashboard/refrigerator">Холодильник</router-link>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" v-if="isPet">
 						<router-link class="nav-link" to="/dashboard/plan">План їжі</router-link>
 					</li>
 				</ul>
 			</nav>
 			<div class="col-xs-9" id="main">
-				<router-view></router-view>
+				<router-view v-on:check="checkCat"></router-view>
 			</div>
 		</div>
 	</div>
@@ -26,18 +29,31 @@ export default {
 	name: 'Dashboard',
 	data () {
 		return {
-			title: 'Якісне управління для кота',
+			isPet: false,
+			name: ''
+		}
+	},
+	methods:{
+		checkCat: function() {
+			let data = {
+				pk: localStorage.getItem('pk')
+			}
+			this.$http.post('http://localhost:8000/dashboard', data, {emulateJSON: true}).then(response => {
+				if(response.body.isPet){
+					this.isPet = true
+					this.name = response.body.name
+					this.$router.push('/dashboard/about');	
+				}else{
+					this.isPet = false;
+					this.$router.push('/dashboard/created');
+				}
+			}, err => {
+				alert(err.body.msg)
+			})
 		}
 	},
 	created: function() {
-		let data = {
-			pk: localStorage.getItem('pk')
-		}
-		this.$http.post('http://localhost:8000/dashboard', data).then(response => {
-		}, err => {
-			alert(err.msg)
-		})
-		this.$router.push('/dashboard/about');
+		this.checkCat();
 	}
 }
 </script>

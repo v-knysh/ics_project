@@ -8,6 +8,7 @@ import AboutCat from '@/components/AboutCat'
 import Plan from '@/components/Plan'
 import Refrigerator from '@/components/Refrigerator'
 import About from '@/components/About'
+import Created from '@/components/Created'
 
 Vue.use(Router)
 Vue.use(Resource)
@@ -42,6 +43,10 @@ export default new Router({
     {
       path: 'plan',
       component: Plan
+    },
+    {
+      path: 'created',
+      component: Created
     },
     ]
   }

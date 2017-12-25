@@ -4,15 +4,15 @@
 			<router-link class="navbar-brand" to="/">EatCats</router-link>
 
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<router-link class="nav-link" to="/about" >Про нас</router-link>
+				</li>
 				<li class="nav-item" v-if="isLogin">
-					<route-link class="nav-link" to="/dashboard">Зайти до кабінета, {{ username }}</route-link>
+					<router-link class="nav-link" to="/dashboard">Зайти до кабінета, {{ username }}</router-link>
 				</li>
 				<li class="nav-item" v-if="isLogin">
 					<button class="btn btn-danger" href="#" @click="logout">Вийти з кабінету</button>
 				</li>			
-				<li class="nav-item" v-if="!isLogin">
-					<router-link class="nav-link" to="/about" >Про нас</router-link>
-				</li>
 				<li class="nav-item" v-if="!isLogin">
 					<a class="nav-link" data-toggle="modal" data-target="#reg-modal" href="#" >Регестрація</a>
 				</li>
