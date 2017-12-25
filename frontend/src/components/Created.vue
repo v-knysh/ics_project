@@ -26,7 +26,7 @@ export default {
 		return {
 			name: '',
 			age: '',
-			weight: ''
+			weight: '',
 		}
 	},
 	methods: {
