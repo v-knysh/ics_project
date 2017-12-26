@@ -34,3 +34,12 @@ python manage.py createsuperuser
 # start serve localhost:8000
 python manage.py migrate
 ```
+
+## run docker
+```
+docker build -t app .
+cd frontend
+docker build -t frontend .
+docker run -p 8000:8000 app
+docker run -it -p 8080:8080 frontend
+```
